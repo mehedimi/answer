@@ -1,3 +1,3 @@
-# answare
+# Answer
 
-See Demo [Here](https://mehedimi.github.io/answare/).
+See Demo [Here](http://mehedimi.tech/answer).
