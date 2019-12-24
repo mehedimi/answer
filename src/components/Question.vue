@@ -2,28 +2,27 @@
     <div class="container">
         <form class="question-form" @submit.prevent="getAnsware">
             <input v-model="question" type="text" class="input" placeholder="Ask your yes no question.">
-            <i>Don't forget to put ? mark on your end of the question.</i>
-            <button class="button mt-1">Get Answare</button>
-            
+            <button class="button mt-1">Get Answer</button>
         </form>
-        <Answare :is-loading="isLoading" v-if="!isEmpty(answare)" :answare="answare"/>
+        <i>Don't forget to put ? mark on your end of the question.</i>
+        <Answer :is-loading="isLoading" v-if="!isEmpty(answer)" :answer="answer"/>
     </div>
 </template>
 
 <script>
-    import Answare from './Answare'
+    import Answer from './Answer'
     import axios from 'axios'
 
     export default {
         data(){
             return {
-                answare: {},
+                answer: {},
                 api: 'https://yesno.wtf/api',
                 question: '',
                 isLoading: false
             }
         },
-        components: { Answare },
+        components: { Answer },
 
         methods: {
             isEmpty(obj){
@@ -36,7 +35,7 @@
                 this.isLoading = true
 
                 axios.get(this.api).then(({ data }) => {
-                    this.answare = data
+                    this.answer = data
                     this.isLoading = false
                 })
             },
@@ -45,11 +44,7 @@
                     return true;
                 }
 
-                if(this.question[this.question.length - 1] !== '?'){
-                    return true;
-                }
-
-                return false;
+                return this.question[this.question.length - 1] !== '?';
             }
         }
     }
@@ -62,13 +57,9 @@
     }
     .question-form{
         text-align: right;
-        i{
-            text-align: left;
-            display: block;
-            margin-top: 5px;
-            font-size: 14px;
-            color: #aaa;
-            font-weight: light
+        display: flex;
+        input {
+            flex: 1;
         }
     }
     .input {
@@ -77,6 +68,7 @@
         padding: 10px;
         border: 1px solid #ddd;
         outline: none;
+        margin-top: 11px;
         &:focus{
             border-color: #e74c3c
         }
@@ -87,6 +79,9 @@
         background-color: #e74c3c;
         color: #fff;
         border: 2px solid #e74c3c;
+    }
+    i {
+        color: #aaa;
     }
 
     .mt-4{
