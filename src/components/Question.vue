@@ -5,7 +5,7 @@
             <button class="button mt-1">Get Answer</button>
         </form>
         <i>Don't forget to put ? mark on your end of the question.</i>
-        <Answer :is-loading="isLoading" v-if="!isEmpty(answer)" :answer="answer"/>
+        <Answer :is-loading="isLoading" v-if="hasAnswer" :answer="answer"/>
     </div>
 </template>
 
@@ -23,11 +23,12 @@
             }
         },
         components: { Answer },
-
+        computed: {
+            hasAnswer() {
+                return Object.keys(this.answer).length;
+            }
+        },
         methods: {
-            isEmpty(obj){
-                return !Object.keys(obj).length;
-            },
             getAnsware() {
                 if(this.isInvalid()){
                     return;

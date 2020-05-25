@@ -2,7 +2,7 @@
     <div class="answer-section">
         <Loader v-if="isLoading" />
         <template v-else>
-            <img :class="{hide: !isImageLoaded}" @load="isImageLoaded = true" :src="answer.image" loading="lazy">
+            <img :class="{hide: !isImageLoaded}" @load="isImageLoaded = true" :src="answer.image">
             <Loader v-if="!isImageLoaded" />
             <h1 v-if="isImageLoaded">{{ answer.answer | capitalize }}</h1>
         </template>
